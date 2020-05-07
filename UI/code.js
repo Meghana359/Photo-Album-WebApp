@@ -96,7 +96,6 @@ function previewFile(input) {
 }
 
 function uploadImage(event){
-  // Uploading images
   console.log("Encoded",encoded);
   var files = document.getElementById("imgfile").files;
 
