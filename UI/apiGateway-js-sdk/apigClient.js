@@ -53,7 +53,7 @@ apigClientFactory.newClient = function (config) {
 
     
     // extract endpoint and path from url
-    var invokeUrl = 'https://m0za8gicn5.execute-api.us-east-1.amazonaws.com/test';
+    var invokeUrl = 'https://m0za8gicn5.execute-api.us-east-1.amazonaws.com/prod';
     var endpoint = /(^https?:\/\/[^\/]+)/g.exec(invokeUrl)[1];
     var pathComponent = invokeUrl.substring(endpoint.length);
 
@@ -83,21 +83,39 @@ apigClientFactory.newClient = function (config) {
     
     
     
-    apigClient.photosPut = function (params, body, additionalParams) {
+    apigClient.photosBucketKeyPut = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, ['key', 'bucket', 'folder', 'Content-Type'], ['body']);
+        
+        var photosBucketKeyPutRequest = {
+            verb: 'put'.toUpperCase(),
+            path: pathComponent + uritemplate('/photos/{bucket}/{key}').expand(apiGateway.core.utils.parseParametersToObject(params, ['key', 'bucket', 'folder', ])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, ['Content-Type']),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(photosBucketKeyPutRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.photosBucketKeyOptions = function (params, body, additionalParams) {
         if(additionalParams === undefined) { additionalParams = {}; }
         
         apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
         
-        var photosPutRequest = {
-            verb: 'put'.toUpperCase(),
-            path: pathComponent + uritemplate('/photos').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+        var photosBucketKeyOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/photos/{bucket}/{key}').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
             headers: apiGateway.core.utils.parseParametersToObject(params, []),
             queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
             body: body
         };
         
         
-        return apiGatewayClient.makeRequest(photosPutRequest, authType, additionalParams, config.apiKey);
+        return apiGatewayClient.makeRequest(photosBucketKeyOptionsRequest, authType, additionalParams, config.apiKey);
     };
     
     
@@ -116,6 +134,24 @@ apigClientFactory.newClient = function (config) {
         
         
         return apiGatewayClient.makeRequest(searchGetRequest, authType, additionalParams, config.apiKey);
+    };
+    
+    
+    apigClient.searchOptions = function (params, body, additionalParams) {
+        if(additionalParams === undefined) { additionalParams = {}; }
+        
+        apiGateway.core.utils.assertParametersDefined(params, [], ['body']);
+        
+        var searchOptionsRequest = {
+            verb: 'options'.toUpperCase(),
+            path: pathComponent + uritemplate('/search').expand(apiGateway.core.utils.parseParametersToObject(params, [])),
+            headers: apiGateway.core.utils.parseParametersToObject(params, []),
+            queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+            body: body
+        };
+        
+        
+        return apiGatewayClient.makeRequest(searchOptionsRequest, authType, additionalParams, config.apiKey);
     };
     
 
