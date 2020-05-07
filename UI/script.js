@@ -16,6 +16,7 @@ var apigClient = apigClientFactory.newClient();
 
 function audioProcessing(){
 	document.getElementById('query').value = null;
+	document.getElementById("searchResponse").innerHTML = null;
 	let final_transcript = '';
 	if (recording == false){
 		recognition.start();
@@ -39,13 +40,13 @@ function audioProcessing(){
 		    console.log("Debug")
 		}
 
-		recognition.onspeechend = function() {
-		  searchErrorResponse.innerHTML = 'You were quiet for a while so voice recognition turned itself off.';
-		}
+		// recognition.onspeechend = function() {
+		//   document.getElementById("searchResponse").innerHTML = 'You were quiet for a while so voice recognition turned itself off.';
+		// }
 
 		recognition.onerror = function(event) {
 		  if(event.error == 'no-speech') {
-		    searchErrorResponse.innerHTML = 'No speech was detected. Try again.';  
+		    document.getElementById("searchResponse").innerHTML = 'No speech was detected. Try again.';  
 		  };
     	}
     }
