@@ -11,3 +11,6 @@ phases:
 artifacts:
   files:
     - packaged-template.yml
+    - '*/LF1-index-photos.py'
+  base-directory: 'LambdaFunctions'
+  discard-paths: yes
