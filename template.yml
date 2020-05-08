@@ -8,7 +8,7 @@ Metadata:
     SpdxLicenseId: Apache-2.0
     HomePageUrl: https://github.com/user1/my-app-project
     SemanticVersion: 0.0.1
-    SourceCodeUrl: https://github.com/Samarth28/PhotoAlbumWebApp
+    SourceCodeUrl: https://github.com/Samarth28/PhotoAlbumWebApp/blob/master/LambdaFunctions/LF1-index-photos.py
 Resources:
   HelloWorldFunction:
     Type: AWS::Serverless::Function
