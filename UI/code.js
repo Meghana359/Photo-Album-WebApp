@@ -15,6 +15,14 @@ var name = '';
 var encoded = null;
 var fileExt = null;
 
+window.onload = function() {
+  document.getElementById('query').addEventListener("keydown", (e) => {
+    if (e.keyCode === 13 && document.getElementById('query').value) {  //checks whether the pressed key is "Enter"
+        submitSearch();
+        e.preventDefault();
+    }
+  }, false);
+}
 
 function submitSearch(){
   query = document.getElementById('query').value
@@ -24,9 +32,9 @@ function submitSearch(){
 }
 
 function searchImages(query){
-  console.log("Searching images");
+  console.log("Searching images - " + query);
   if (query == ""){
-    alert("Empty string provided to serach");
+    alert("Empty string provided to search");
   }
   else{
    var params = {"q":query};
@@ -78,6 +86,8 @@ function displayS3Images(img_list){
 
 function previewFile(input) {
   document.getElementById("uploadResponse").innerHTML = null;
+  document.getElementById("submit_upload_button").style.backgroundColor = "rgba(15, 137, 204, 1)";
+  document.getElementById("submit_upload_button").style.color = "white";
   console.log("Inside preview")
   var reader = new FileReader();
   name = input.files[0].name;
@@ -96,6 +106,8 @@ function previewFile(input) {
 }
 
 function uploadImage(event){
+  document.getElementById("submit_upload_button").style.backgroundColor = "";
+  document.getElementById("submit_upload_button").style.color = "";
   console.log("Encoded",encoded);
   var files = document.getElementById("imgfile").files;
 

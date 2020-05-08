@@ -19,18 +19,18 @@
 <body  style="background-image: url('blue-vintage.jpg'); background-size: 100% 100%;">
 	 <div class="container" style="text-align: center; height:100%; ">
 	 	<div>
-	 	<form>
-    		<input type="text" id="query" style="height:40px;font-size:20px;"/>
-           <i class="fa fa-search fa-2x" onclick="submitSearch()"></i>
-           <i class="fa fa-microphone  fa-2x" onclick="audioProcessing()"></i>
-		</form>
-		<div id="searchResponse"></div>
+  	 	<form>
+      		<input type="text" id="query" style="height:45px;font-size:20px;border:0px;border-radius:4px;padding-left:8px;padding-right:8px;"/>
+          <i class="fa fa-search fa-2x" onclick="submitSearch()" style="padding: 0px 2px 8px 2px; vertical-align: middle;"></i>
+          <i class="fa fa-microphone fa-2x" id="microphone_icon" onclick="audioProcessing()" style="padding: 0px 2px 6px 2px; vertical-align: middle;"></i>
+  		</form>
+  		<div id="searchResponse"></div>
 		</div>
 		<div >
 			<br><br>
 			<label for="img" class = "fa fa-cloud-upload" style="height:40px;font-size:20px;" ></label>
   			<input type="file" id="imgfile" name="img" accept="image/*" onchange="previewFile(this);" style="height:40px;width:220px;font-size:15px;"><br>
-  			<input type="submit" onclick="uploadImage(event)" style="height:40px;font-size:20px;"> 
+  			<input type="submit" id="submit_upload_button" onclick="uploadImage(event)" style="height:40px;font-size:20px;border:0px;border-radius:6px;"> 
   			<div id="uploadResponse"></div>
 		</div>
 		<table width="100%" style="height: 100%;" border="0">
