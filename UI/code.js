@@ -28,6 +28,7 @@ function submitSearch(){
   query = document.getElementById('query').value
   document.getElementById("displayImages").innerHTML = null;
   document.getElementById("uploadResponse").innerHTML = null;
+  document.getElementById("searchResponse").innerHTML = null;
   searchImages(query)
 }
 
