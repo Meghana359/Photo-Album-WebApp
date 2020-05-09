@@ -12,10 +12,8 @@ def indexData(photo,bucket,labels):
     
     service = 'es'
     credentials = boto3.Session().get_credentials()
-    access_key='AKIAXLVHGGD7V47MHFZY'
-    secret_key='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'
-
-    awsauth = AWS4Auth(access_key,secret_key, region, service)
+   
+    awsauth = AWS4Auth(credentials.access_key, credentials.secret_key, region, service, session_token=credentials.token)
     es = Elasticsearch(
         hosts = [{'host': host, 'port': 443}],
         http_auth = awsauth,
