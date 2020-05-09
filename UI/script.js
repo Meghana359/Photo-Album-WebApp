@@ -22,6 +22,7 @@ function audioProcessing(){
 		recognition.start();
 		recording = true;
   		console.log('Started voice recognition');
+  		document.getElementById("microphone_icon").style.color = "rgba(217,37,37,1)"; // #d92525
   	 	recognition.onresult = function(event) {
 	    	var interim_transcript = '';
 
@@ -36,6 +37,8 @@ function audioProcessing(){
 		    console.log("Output:",final_transcript);
 		    document.getElementById("displayImages").innerHTML = null;
   			document.getElementById("uploadResponse").innerHTML = null;
+  			document.getElementById('query').value = final_transcript;
+  			document.getElementById("microphone_icon").style.color = "";
 		    searchImages(final_transcript);
 		    console.log("Debug")
 		}
@@ -46,12 +49,14 @@ function audioProcessing(){
 
 		recognition.onerror = function(event) {
 		  if(event.error == 'no-speech') {
-		    document.getElementById("searchResponse").innerHTML = 'No speech was detected. Try again.';  
+		    document.getElementById("searchResponse").innerHTML = 'No speech was detected. Try again.';
+		    document.getElementById("microphone_icon").style.color = "";
 		  };
     	}
     }
   	else{
   		recognition.stop();
+  		document.getElementById("microphone_icon").style.color = "";
   		recording = false;
   	};
 };
