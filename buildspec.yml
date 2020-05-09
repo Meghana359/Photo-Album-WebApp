@@ -1,4 +1,4 @@
-  
+
 version: 0.2
 phases:
   install:
@@ -6,7 +6,6 @@ phases:
         python: 3.7
   build:
     commands:
-      - pip install --upgrade pip
       - pip install pipenv --user
       - pipenv install awscli aws-sam-cli
       - pipenv run sam package --template-file template.yml --s3-bucket sample-lambda-rep --output-template-file packaged-template.yml

@@ -1,0 +1,131 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Resources": {
+        "LF1role": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Action": [
+                                "sts:AssumeRole"
+                            ],
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": [
+                                    "lambda.amazonaws.com"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "ManagedPolicyArns": [
+                    "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                ],
+                "Tags": [
+                    {
+                        "Value": "SAM",
+                        "Key": "lambda:createdBy"
+                    }
+                ]
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "68456a10-d9aa-44fb-a773-7efb027f5a93"
+                }
+            }
+        },
+        "LF1Function": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+                "Handler": "LF1-index-photos.lambda_handler",
+                "Code": {
+                    "S3Bucket": "cloud-form-t2",
+                    "S3Key": "LF1-index-photos"
+                },
+                "Role": {
+                    "Fn::GetAtt": [
+                        "LF1role",
+                        "Arn"
+                    ]
+                },
+                "Runtime": "python3.8",
+                "Tags": [
+                    {
+                        "Value": "SAM",
+                        "Key": "lambda:createdBy"
+                    }
+                ]
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "c8336fa2-19d0-4142-ba0e-c65235929011"
+                }
+            }
+        },
+        "AGRA3ZWAY": {
+            "Type": "AWS::ApiGateway::RestApi",
+            "Properties": {
+                "Name":"API Search Photos",
+                "BodyS3Location": {
+                    "Bucket": "cloud-form-t2",
+                    "Key": "swagger.yml"
+                }
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "ab088e34-2843-46ff-8047-fb9681e003a1"
+                }
+            }
+        }
+    },
+    "Metadata": {
+        "AWS::ServerlessRepo::Application": {
+            "SpdxLicenseId": "Apache-2.0",
+            "Name": "my-app",
+            "Author": "Ananya",
+            "SourceCodeUrl": "https://github.com/Samarth28/PhotoAlbumWebApp",
+            "SemanticVersion": "0.0.1",
+            "HomePageUrl": "https://github.com/user1/my-app-project",
+            "Description": "hello world"
+        },
+        "AWS::CloudFormation::Designer": {
+            "68456a10-d9aa-44fb-a773-7efb027f5a93": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 320,
+                    "y": -10
+                },
+                "z": 1,
+                "embeds": []
+            },
+            "c8336fa2-19d0-4142-ba0e-c65235929011": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 180,
+                    "y": 90
+                },
+                "z": 1,
+                "embeds": []
+            },
+            "ab088e34-2843-46ff-8047-fb9681e003a1": {
+                "size": {
+                    "width": 140,
+                    "height": 140
+                },
+                "position": {
+                    "x": -60,
+                    "y": 30
+                },
+                "z": 0
+            }
+        }
+    }
+}
