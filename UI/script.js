@@ -43,9 +43,10 @@ function audioProcessing(){
 		    console.log("Debug")
 		}
 
-		// recognition.onspeechend = function() {
-		//   document.getElementById("searchResponse").innerHTML = 'You were quiet for a while so voice recognition turned itself off.';
-		// }
+		 recognition.onspeechend = function() {
+		   //document.getElementById("searchResponse").innerHTML = 'You were quiet for a while so voice recognition turned itself off.';
+                  document.getElementById("microphone_icon").style.color = "";
+		 }
 
 		recognition.onerror = function(event) {
 		  if(event.error == 'no-speech') {
